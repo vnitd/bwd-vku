@@ -38,7 +38,7 @@ app.use(urlencoded({ extended: false }));
  */
 const apiPrefix = process.env.API_PREFIX;
 console.log(apiPrefix);
-app.use("/", (_req, res) => {
+app.get("/", (_req, res) => {
 	res.json({ message: "Hello world!" });
 });
 app.use(`${apiPrefix}/users`, userRoute);
