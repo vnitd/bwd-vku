@@ -37,6 +37,7 @@ app.use(urlencoded({ extended: false }));
  * Routes setup.
  */
 const apiPrefix = process.env.API_PREFIX;
+console.log(apiPrefix);
 app.use("/", (_req, res) => {
 	res.json({ message: "Hello world!" });
 });
