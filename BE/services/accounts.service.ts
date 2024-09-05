@@ -23,7 +23,7 @@ async function addAccount(data: Account) {
 	} catch (err: any) {
 		if (err?.code === 11000) {
 			if (err?.keyPattern?.sid) return { status: 400, result: "ACCOUNT_ID_UNIQUE" };
-			if (err?.keyPattern?.email) return { status: 400, result: "ACCOUNT_ID_UNIQUE" };
+			if (err?.keyPattern?.email) return { status: 400, result: "ACCOUNT_EMAIL_UNIQUE" };
 		}
 		if (err?.errors?.sid) return { status: 400, result: err?.errors?.sid.message };
 		if (err?.errors?.email) return { status: 400, result: err?.errors?.email.message };
