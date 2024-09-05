@@ -1,4 +1,4 @@
-import { genSalt, hash } from "bcrypt";
+import { genSalt, hash, compare } from "bcrypt";
 import { Account } from "../models/account.model.js";
 import accountsSchema from "../schemas/accounts.schema.js";
 
