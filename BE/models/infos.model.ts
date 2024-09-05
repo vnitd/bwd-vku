@@ -10,4 +10,5 @@ export interface Infos {
 	avt: string;
 	banner: string;
 	enable: Number;
+	role: String
 }

@@ -1,35 +1,37 @@
 import mongoose from "mongoose";
-import { Class } from "../models/class.model.js";
-import classSchema from "../schemas/class.schema.js";
+import quizSchema from "../schemas/quiz.schema";
+import { Quiz } from "../models/quiz.model";
 
-async function createClass(data: Class) {
+async function createQuiz(data: Quiz) {
 	try {
 		// create mongo record
-		const res = await classSchema.create<Class>(data);
+		const res = await quizSchema.create<Quiz>(data);
 
 		return {
 			status: 200,
 			result: res,
 		};
 	} catch (err: any) {
-		if (err?.errors?.name)
-			return { status: 400, result: err?.errors?.name.message };
-		if (err?.errors?.teacher)
-			return { status: 400, result: err?.errors?.teacher.message };
+		if (err?.errors?.title)
+			return { status: 400, result: err?.errors?.title.message };
+		if (err?.errors?.content)
+			return { status: 400, result: err?.errors?.content.message };
+        if (err?.errors?.classzz)
+			return { status: 400, result: err?.errors?.classzz.message };
 		throw err;
 	}
 }
 
-async function getClass(id: string): Promise<any> {
+async function getQuiz(id: string): Promise<any> {
 	try {
-		const res = await classSchema.findOne({
+		const res = await quizSchema.findOne({
 			_id: new mongoose.Types.ObjectId(id),
 		});
 
 		if (res == null) {
 			return {
 				status: 400,
-				result: "INFO_NOT_FOUND",
+				result: "QUIZ_NOT_FOUND",
 			};
 		}
 
@@ -42,9 +44,9 @@ async function getClass(id: string): Promise<any> {
 	}
 }
 
-async function updateClass(id: string, data: any): Promise<any> {
+async function updateQuiz(id: string, data: any): Promise<any> {
 	try {
-		const res = await classSchema.findOneAndUpdate(
+		const res = await quizSchema.findOneAndUpdate(
 			{ _id: new mongoose.Types.ObjectId(id) },
 			{ $set: data },
 			{ new: true, runValidators: true }
@@ -53,7 +55,7 @@ async function updateClass(id: string, data: any): Promise<any> {
 		if (!res) {
 			return {
 				status: 400,
-				result: "INFO_NOT_FOUND",
+				result: "QUIZ_NOT_FOUND",
 			};
 		}
 		return {
@@ -65,10 +67,10 @@ async function updateClass(id: string, data: any): Promise<any> {
 	}
 }
 
-async function deleteClass(id: string): Promise<any> {
+async function deleteQuiz(id: string): Promise<any> {
 	try {
 		// Tìm và xóa bản ghi theo id
-		const res = await classSchema.findOneAndDelete({
+		const res = await quizSchema.findOneAndDelete({
 			_id: new mongoose.Types.ObjectId(id),
 		});
 
@@ -87,4 +89,4 @@ async function deleteClass(id: string): Promise<any> {
 	}
 }
 
-export { createClass, getClass, updateClass, deleteClass };
+export { createQuiz, getQuiz, updateQuiz, deleteQuiz };

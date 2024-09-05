@@ -11,7 +11,9 @@ import infosRouter from "./routes/infos.route";
 import infosRoute from "./routes/infos.route";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import quizRoute from "./routes/quizs.route";
 import cors from "cors";
+import joinedRoute from "./routes/joinedRoute";
 
 dotenv.config();
 const firebaseConfig = {
@@ -67,6 +69,8 @@ app.get("/", (_req, res) => {
 app.use(`${apiPrefix}/users`, userRoute);
 app.use(`${apiPrefix}/classes`, classRoute);
 app.use(`${apiPrefix}/infos`, infosRoute);
+app.use(`${apiPrefix}/quizs`, quizRoute);
+app.use(`${apiPrefix}/joined`, joinedRoute);
 /**
  * Handle errors.
  */
