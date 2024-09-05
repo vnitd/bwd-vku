@@ -1,11 +1,19 @@
-import express, { Express, json, NextFunction, Request, Response, urlencoded } from "express";
+import express, {
+	Express,
+	json,
+	NextFunction,
+	Request,
+	Response,
+	urlencoded,
+} from "express";
 import dotenv from "dotenv";
 import normalizePort from "./utils/normalizePort.js";
 import logger from "morgan";
 import { createServer } from "http";
 import { onError, onListening } from "./utils/appEvents.js";
-import userRoute from "./routes/users.route.js";
 import { connect } from "mongoose";
+import userRoute from "./routes/users.route.js";
+import classRoute from "./routes/class.route.js";
 
 dotenv.config();
 
@@ -42,13 +50,17 @@ app.get("/", (_req, res) => {
 	res.json({ message: "Hello world!" });
 });
 app.use(`${apiPrefix}/users`, userRoute);
+app.use(`${apiPrefix}/create-class`, classRoute);
 
 /**
  * Handle errors.
  */
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 	console.error(err?.stack);
-	res.status(500).json({ message: "Internal Server Error!", stack: err?.message });
+	res.status(500).json({
+		message: "Internal Server Error!",
+		stack: err?.message,
+	});
 });
 
 /**

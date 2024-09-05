@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { addAccount } from "../services/accounts.service.js";
+import { addAccount, compareAccount } from "../services/accounts.service.js";
 import { Account } from "../models/account.model.js";
 
 async function register(req: Request, res: Response, next: NextFunction) {
@@ -13,7 +13,8 @@ async function register(req: Request, res: Response, next: NextFunction) {
 
 async function login(req: Request, res: Response, next: NextFunction) {
 	try {
-		res.json({ status: "ok" });
+		const message = await compareAccount(req.query);
+		res.status((message?.status as number) || 200).json(message);
 	} catch (err) {
 		next(err);
 	}
