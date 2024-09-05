@@ -1,11 +1,4 @@
-import express, {
-	Express,
-	json,
-	NextFunction,
-	Request,
-	Response,
-	urlencoded,
-} from "express";
+import express, { Express, json, NextFunction, Request, Response, urlencoded } from "express";
 import dotenv from "dotenv";
 import normalizePort from "./utils/normalizePort";
 import logger from "morgan";
@@ -19,6 +12,8 @@ import infosRoute from "./routes/infos.route";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import quizRoute from "./routes/quizs.route";
+import cors from "cors";
+import joinedRoute from "./routes/joinedRoute";
 
 dotenv.config();
 const firebaseConfig = {
@@ -61,6 +56,7 @@ app.set("port", port);
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
+app.use(cors());
 
 /**
  * Routes setup.
@@ -74,6 +70,7 @@ app.use(`${apiPrefix}/users`, userRoute);
 app.use(`${apiPrefix}/classes`, classRoute);
 app.use(`${apiPrefix}/infos`, infosRoute);
 app.use(`${apiPrefix}/quizs`, quizRoute);
+app.use(`${apiPrefix}/joined`, joinedRoute);
 /**
  * Handle errors.
  */

@@ -94,14 +94,24 @@ async function getInfos(req: Request, res: Response, next: NextFunction) {
 	}
 }
 
+// async function updateInfos(req: Request, res: Response, next: NextFunction) {
+// 	try {
+// 		const { id } = req.params;
+// 		const { avatar, banner } = req.body;
+
+// 		let updatedData: any = {};
+
+// 		const message = await updateInfo(id, updatedData);
+// 		res.status((message?.status as number) || 200).json(message);
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// }
+
 async function updateInfos(req: Request, res: Response, next: NextFunction) {
 	try {
-		const { id } = req.params;
-		const { avatar, banner } = req.body;
-
-		let updatedData: any = {};
-
-		const message = await updateInfo(id, updatedData);
+		// Lấy `id` từ URL và dữ liệu từ body
+		const message = await updateInfo(req.params.id, req.body);
 		res.status((message?.status as number) || 200).json(message);
 	} catch (err) {
 		next(err);
