@@ -11,4 +11,12 @@ async function register(req: Request, res: Response, next: NextFunction) {
 	}
 }
 
-export { register };
+async function login(req: Request, res: Response, next: NextFunction) {
+	try {
+		res.json({ status: "ok" });
+	} catch (err) {
+		next(err);
+	}
+}
+
+export { register, login };
