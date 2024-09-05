@@ -1,11 +1,4 @@
-import express, {
-	Express,
-	json,
-	NextFunction,
-	Request,
-	Response,
-	urlencoded,
-} from "express";
+import express, { Express, json, NextFunction, Request, Response, urlencoded } from "express";
 import dotenv from "dotenv";
 import normalizePort from "./utils/normalizePort";
 import logger from "morgan";
@@ -18,6 +11,7 @@ import infosRouter from "./routes/infos.route";
 import infosRoute from "./routes/infos.route";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import cors from "cors";
 
 dotenv.config();
 const firebaseConfig = {
@@ -60,6 +54,7 @@ app.set("port", port);
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
+app.use(cors());
 
 /**
  * Routes setup.
