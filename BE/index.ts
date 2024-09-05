@@ -14,6 +14,8 @@ import { onError, onListening } from "./utils/appEvents.js";
 import { connect } from "mongoose";
 import userRoute from "./routes/users.route.js";
 import classRoute from "./routes/class.route.js";
+import infosRouter from "./routes/infos.route.js";
+import infosRoute from "./routes/infos.route.js";
 
 dotenv.config();
 
@@ -50,8 +52,8 @@ app.get("/", (_req, res) => {
 	res.json({ message: "Hello world!" });
 });
 app.use(`${apiPrefix}/users`, userRoute);
-app.use(`${apiPrefix}/create-class`, classRoute);
-
+app.use(`${apiPrefix}/classes`, classRoute);
+app.use(`${apiPrefix}`, infosRoute);
 /**
  * Handle errors.
  */

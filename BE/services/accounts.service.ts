@@ -40,7 +40,7 @@ async function compareAccount(data: any): Promise<any> {
 	try {
 		// create mongo record
 		const res = await accountsSchema.findOne<any>({
-			email: data?.email,
+			$or: [{ email: data?.acc }, { sid: data?.acc }],
 		});
 
 		console.log(res?.password);
