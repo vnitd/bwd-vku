@@ -7,11 +7,11 @@ import { onError, onListening } from "./utils/appEvents";
 import { connect } from "mongoose";
 import userRoute from "./routes/users.route";
 import classRoute from "./routes/class.route";
-import infosRouter from "./routes/infos.route";
 import infosRoute from "./routes/infos.route";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import cors from "cors";
+import geminiRoute from "./routes/gemini.route";
 
 dotenv.config();
 const firebaseConfig = {
@@ -67,6 +67,8 @@ app.get("/", (_req, res) => {
 app.use(`${apiPrefix}/users`, userRoute);
 app.use(`${apiPrefix}/classes`, classRoute);
 app.use(`${apiPrefix}/infos`, infosRoute);
+app.use(`${apiPrefix}/gemini`, geminiRoute);
+
 /**
  * Handle errors.
  */

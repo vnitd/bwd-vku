@@ -6,6 +6,7 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import GeminiLoading from "@/components/loading_gemini";
 
 export default function Home() {
   return (
@@ -25,17 +26,6 @@ export default function Home() {
       <div className="flex gap-3">
         <Link
           isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
           className={buttonStyles({ variant: "bordered", radius: "full" })}
           href={siteConfig.links.github}
         >
@@ -51,6 +41,7 @@ export default function Home() {
           </span>
         </Snippet>
       </div>
+      <GeminiLoading isLoading height={50} width={50} />
     </section>
   );
 }
