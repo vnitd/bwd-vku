@@ -16,9 +16,10 @@ export const authAPI = baseApi.injectEndpoints({
     }),
     login: build.mutation({
       query: (data: any) => ({
-        url: endpoints.endpointAuth.LOGIN,
+        url:
+          endpoints.endpointAuth.LOGIN +
+          `?acc=${data.acc}&password=${data.password}`,
         method: "GET",
-        body: { data },
         flashError: true,
       }),
     }),

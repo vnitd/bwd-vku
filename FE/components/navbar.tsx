@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -17,14 +18,10 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
-  Logo,
-} from "@/components/icons";
+import { GithubIcon, SearchIcon, Logo } from "@/components/icons";
+import { useCookies } from "react-cookie";
+import { constants } from "@/config";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
   const searchInput = (
@@ -47,6 +44,13 @@ export const Navbar = () => {
       type="search"
     />
   );
+
+  const [cookies] = useCookies([constants.ACCESS_TOKEN]);
+  const [display, setDisplay] = useState("flex");
+
+  useEffect(() => {
+    if (cookies[constants.ACCESS_TOKEN]) setDisplay("hidden");
+  }, [cookies]);
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -80,28 +84,20 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-            <DiscordIcon className="text-default-500" />
-          </Link>
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
+        <NavbarItem className={display}>
           <Button
-            isExternal
             as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
+            className={`text-sm font-normal text-default-600 bg-default-100`}
+            href={siteConfig.links.login}
             variant="flat"
           >
-            Sponsor
+            Sign in
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -119,21 +115,17 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
+              <Link color={"foreground"} href="#" size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>
           ))}
+
+          <NavbarItem className={display}>
+            <Link color={"foreground"} href="#" size="lg">
+              Sign in
+            </Link>
+          </NavbarItem>
         </div>
       </NavbarMenu>
     </NextUINavbar>

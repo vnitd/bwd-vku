@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-import { Bounce, ToastContainer } from "react-toastify";
 
 import { Providers } from "./(dashboard)/providers";
 
@@ -42,22 +41,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <ToastContainer
-          closeOnClick
-          draggable
-          pauseOnFocusLoss
-          pauseOnHover
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          position="top-right"
-          rtl={false}
-          theme="light"
-          transition={Bounce}
-        />
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           {children}
-          <footer className="w-full flex items-center justify-center py-3 absolute bottom-0">
+          <footer className="w-full flex items-center justify-center py-3">
             <Link
               isExternal
               className="flex items-center gap-1 text-current"

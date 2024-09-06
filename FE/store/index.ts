@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { baseApi } from "./queries/base";
 import { authAPI } from "./queries/auth";
+import { geminiAPI } from "./queries/gemini";
 
 export const store = configureStore({
   reducer: {
     [authAPI.reducerPath]: authAPI.reducer,
+    [geminiAPI.reducerPath]: geminiAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
