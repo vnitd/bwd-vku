@@ -9,10 +9,10 @@ function GeminiLoading({
   width: number;
   height: number;
   isLoading?: boolean;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }>) {
   return (
-    <div
+    <button
       className={`w-[${width}px] h-[${height}] ${isLoading ? "animate-pulse" : ""} cursor-pointer`}
       onClick={onClick}
     >
@@ -23,7 +23,7 @@ function GeminiLoading({
         src="/gemini.png"
         width={width}
       />
-    </div>
+    </button>
   );
 }
 
