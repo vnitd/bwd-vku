@@ -54,7 +54,15 @@ app.set("port", port);
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
-app.use(cors());
+console.log(process.env.FE_URL);
+app.use(
+	cors({
+		origin: "*",
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		preflightContinue: false,
+		optionsSuccessStatus: 200,
+	})
+);
 
 /**
  * Routes setup.
