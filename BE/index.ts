@@ -55,13 +55,16 @@ app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 console.log(process.env.FE_URL);
-app.use(
-	cors({
-		origin: "*",
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true,
-	})
-);
+app.options("*", cors());
+app.use((req, res, next) => {
+	if (req.method === "OPTIONS") {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+		res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+		return res.sendStatus(200);
+	}
+	next();
+});
 
 /**
  * Routes setup.
