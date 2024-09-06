@@ -71,5 +71,9 @@ export const siteConfig = {
       value:
         "日本の経済成長における地方都市と大都市圏の役割について、特にインフラ整備、技術革新、およびグローバリゼーションの影響を考慮しながら、20世紀から21世紀初頭にかけての変遷を具体例を交えながら詳しく説明し、今後の持続可能な発展における課題や解決策についてもあなたの考えを述べてください。",
     },
+    {
+      value:
+        "Nếu bạn thay thế từng bộ phận của một con tàu cũ bằng bộ phận mới, cho đến khi không còn bộ phận ban đầu nào, thì liệu đó có còn là con tàu ban đầu không? Và nếu bạn dùng các bộ phận cũ để lắp ráp lại một con tàu khác, thì con tàu nào mới là con tàu của Theseus?",
+    },
   ],
 };

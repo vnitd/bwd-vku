@@ -55,6 +55,12 @@ app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 console.log(process.env.FE_URL);
+app.use(
+	cors({
+		origin: "*",
+		optionsSuccessStatus: 200,
+	})
+);
 app.options("*", cors());
 app.use((req, res, next) => {
 	if (req.method === "OPTIONS") {
