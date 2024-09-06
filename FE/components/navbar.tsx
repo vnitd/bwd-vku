@@ -15,13 +15,13 @@ import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
+import { useCookies } from "react-cookie";
 
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, SearchIcon, Logo } from "@/components/icons";
-import { useCookies } from "react-cookie";
 import { constants } from "@/config";
-import { useEffect, useState } from "react";
 
 export const Navbar = () => {
   const searchInput = (
@@ -115,7 +115,7 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color={"foreground"} href="#" size="lg">
+              <Link color={"foreground"} href={item.href} size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>
